@@ -1,0 +1,253 @@
+.create {
+  max-width: 30%;
+  width: 100%;
+  padding: 5px;
+  height: auto;
+}
+.create-in {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+}
+.create-in h3 {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.create-in .for {
+  margin-top: 20px;
+}
+.create-in .create-elmnt {
+  height: 80px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+.create-in .create-elmnt button {
+  background-color: #623ce7;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  max-width: 80px;
+  cursor: pointer;
+  width: 100%;
+  height: 30px;
+  color: white;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.available {
+  max-width: 70%;
+  width: 100%;
+  padding: 5px;
+  height: auto;
+}
+.available-in {
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #e5e5e5;
+  background: #ffffff;
+}
+.create-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.available h3 {
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.available-search {
+  max-width: 300px;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+}
+.available-search input {
+  height: 30px;
+  border: none;
+  outline: none;
+  background: #f6f7fc;
+  padding: 0 0 0 15px;
+  border-radius: 5px;
+  margin-left: auto;
+}
+.Aud-date {
+  background: #f6f7fc;
+  margin-right: 15px;
+  max-width: 175px;
+  width: 100%;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Aud-date span {
+  color: #333333;
+  font-size: 11px;
+}
+.available-search button {
+  background: #623ce7;
+  border: none;
+  outline: none;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
+  color: white;
+  font-size: 12px;
+}
+.avail-table {
+  width: 100%;
+  margin-top: 20px;
+}
+.table-head {
+  background: #f6f7fc;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  color: #623ce7;
+  font-weight: 600;
+  border-radius: 25px 25px 0 0;
+}
+.table-row {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.edit,
+.delete {
+  border-radius: 8px;
+  width: 50px;
+  height: 27.5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.edit {
+  background: #ffaf2a;
+}
+.delete {
+  width: 70px;
+  margin-left: 10px;
+  background: #ff4267;
+}
+.field.four button i {
+  font-size: 10px;
+}
+.table-row:nth-child(odd) {
+  background: #f6f7fc;
+}
+.table-end {
+  background: #f6f7fc;
+  display: flex;
+  height: 40px;
+  border-radius: 0 0 25px 25px;
+  position: relative;
+}
+.elmnts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 150px;
+  width: 100%;
+  position: absolute;
+  right: 10%;
+  top: 23%;
+}
+.elmnts span {
+  color: #333333;
+  font-size: 15px;
+}
+
+.table-end button,
+.elmnts button {
+  height: 25px;
+  width: 25px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #ffffff;
+  border-radius: 3px;
+}
+
+.page-change {
+  max-width: 45%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#list {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  outline: none;
+  border: none;
+  height: 100%;
+  padding: 0 15px;
+  background: #f3f5f9;
+  border-radius: 5px;
+}
+.audit-table {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+.audit-table .table-head {
+  grid-template-columns: 20% 20% 20% 20% 20%;
+}
+table {
+  margin-top: 30px;
+  font-size: 12px;
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  background-color: #f6f7fc;
+  border-radius: 30px 30px 0 0;
+}
+
+table thead th {
+  color: #623ce7;
+  font-size: 17px;
+  font-weight: 500;
+}
+table td,
+table th {
+  text-align: center;
+  padding: 10px;
+}
+table tbody tr:nth-child(odd) {
+  background-color: white;
+}
+table td {
+  font-size: 14px;
+  color: black;
+  font-weight: 600;
+}
+.blue i {
+  color: rgb(70, 181, 255);
+}
+.red i,
+.blue i {
+  font-size: 16px;
+  margin-right: 2px;
+}
+.red i {
+  color: red;
+}
+.setting-table table tr th:nth-child(2),
+.setting-table table tr td:nth-child(2) {
+  padding-right: 450px;
+  padding-left: 0;
+}

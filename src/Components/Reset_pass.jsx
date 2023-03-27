@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as y from "yup";
 import { useForm } from "react-hook-form";
 
-export const Fpass2 = () => {
+export const Reset_pass = () => {
   const [warn, setWarm] = useState("");
 
   const schema = y.object().shape({

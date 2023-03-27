@@ -97,7 +97,7 @@ form.Signin {
   transition: all 0.3s ease-in-out;
 }
 .for input {
-  background: rgba(139, 139, 139, 0.05);
+  background: #f3f5f9;
   padding: 15px;
 }
 .for button {

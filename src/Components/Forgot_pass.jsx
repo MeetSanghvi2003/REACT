@@ -5,7 +5,7 @@ import * as y from "yup";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export const Fpass1 = () => {
+export const Forgot_pass = () => {
   const [warn, setWarn] = useState("");
 
   const schema = y.object().shape({

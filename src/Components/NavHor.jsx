@@ -20,7 +20,6 @@ export const NavHor = () => {
           <div className="element">
             <div className="switch">
               <label>
-                {" "}
                 <input type="checkbox" />
                 <span class="slider round"></span>
               </label>

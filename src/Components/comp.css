@@ -5,6 +5,8 @@ nav.Navhor {
   height: 60px;
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
+  background: white;
+  z-index: 1;
 }
 .hor-in {
   height: 100%;
@@ -289,17 +291,19 @@ div.noti-message:nth-last-child(2) {
   padding: 5px;
   border-radius: 3px;
   max-width: 125px;
-  width: 100%;
   display: none;
+  width: 100%;
   border: 1px solid #bdbdbd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 .settings,
 .Log-Out {
+  background: white;
   padding: 10px;
   font-family: "Times New Roman", Times, serif;
   cursor: pointer;
   border-radius: 5px;
+  z-index: 1;
 }
 .settings i,
 .Log-Out i {
@@ -333,7 +337,7 @@ div.noti-message:nth-last-child(2) {
   position: fixed;
   left: 0;
   z-index: 1;
-  overflow-x: hidden;
+  overflow: hidden;
   border-right: 1px solid #e5e5e5;
 }
 .list {
@@ -349,7 +353,7 @@ div.noti-message:nth-last-child(2) {
   display: block;
   color: #828282;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 50px;
   width: 100%;
   padding: 0 20px;
@@ -392,11 +396,9 @@ div.noti-message:nth-last-child(2) {
 }
 .sub-menu a {
   line-height: 30px;
-  display: flex;
-  z-index: 2;
 }
 .sub-item span {
-  font-size: 12px;
+  font-size: 11px;
 }
 .sub-item i {
   color: #623ce7;
