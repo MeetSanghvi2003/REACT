@@ -6,7 +6,7 @@ import { BASICtable } from "../table_components/BASIC-table";
 import { useEffect } from "react";
 import { Fdata } from "../table_components/Data";
 
-export const ManageFloor = () => {
+export const ManageFloor = (props) => {
   const [number, setNumber] = useState("");
   const [name, setName] = useState("");
   const [warn, setWarn] = useState("");
@@ -31,8 +31,8 @@ export const ManageFloor = () => {
     let num = floors[floors.length - 1].num + 1;
     let floor = {
       num: num,
-      floor_no: number,
-      floor_name: name,
+      f_no: number,
+      f_name: name,
     };
     setFloors([...floors, floor]);
   };
@@ -56,7 +56,7 @@ export const ManageFloor = () => {
   return (
     <>
       <div className="create">
-        <div className="create-in">
+        <div className="create-in" style={props.myStyle}>
           <div className="create-header">
             <h3>Create Floors</h3>
           </div>
@@ -83,14 +83,19 @@ export const ManageFloor = () => {
         </div>
       </div>
       <div className="available">
-        <div className="available-in">
+        <div className="available-in" style={props.myStyle}>
           <div className="create-header">
             <h3>Available Floors</h3>
             <div className="available-search">
               <input type="text" placeholder="Search" />
             </div>
           </div>
-          <BASICtable columns={FloorCol} data={Fdata} />;
+          <BASICtable
+            columns={FloorCol}
+            data={Fdata}
+            onDelete={onDelete}
+            style={props.myStyle}
+          />
         </div>
       </div>
     </>

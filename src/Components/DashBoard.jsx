@@ -12,6 +12,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { useState } from "react";
 
 export const Dashboard = () => {
   const data = [
@@ -26,12 +27,50 @@ export const Dashboard = () => {
     { name: "25", value: 14000 },
     { name: "27", value: 6000 },
   ];
+  const notify = [
+    {
+      name: "Meet",
+      reqFor: "Request for bath",
+      bed_no: "Bed No.3",
+      ward_no: "Ward No.2,",
+    },
+    {
+      name: "David",
+      reqFor: "Request for Cloths",
+      bed_no: "Bed No.3",
+      ward_no: "Ward No.2,",
+    },
+    {
+      name: "Tom",
+      reqFor: "Request for Cloths",
+      bed_no: "Bed No.3",
+      ward_no: "Ward No.2,",
+    },
+    {
+      name: "Nick",
+      reqFor: "Request for Urgency",
+      bed_no: "Bed No.3",
+      ward_no: "Ward No.2,",
+    },
+    {
+      name: "Andrew",
+      reqFor: "Request for Cleaning",
+      bed_no: "Bed No.3",
+      ward_no: "Ward No.2,",
+    },
+  ];
+
+  const [mystyle, setmyStyle] = useState({
+    background: "#1F2937",
+    color: "#F6F7FC",
+  });
+
   return (
     <>
       <div className="main">
         <div className="main-in">
           <div className="create-header">
-            <h3>Audit Log</h3>
+            <h3>Dashboard </h3>
             <div className="Aud-date">
               <span>
                 <i className="bi bi-calendar3"></i> 25 mar 20 - 25 mar 23
@@ -102,86 +141,24 @@ export const Dashboard = () => {
         </div>
       </div>
       <div className="noti-sidebar">
-        <div className="noti-message side">
-          <div className="noti-image side">
-            <img src={logo} alt="" />
-          </div>
-          <div className="noti-info side">
-            <span>Meet</span>
-            <p className="reqfor side"> Request for Bath</p>
-            <div className="reqaddress side">
-              <p className="bedNo side">Bed No.3</p>
-              <p className="wardNo side">Ward No.2</p>
+        {notify.map((noti) => (
+          <div className="noti-message side">
+            <div className="noti-image side">
+              <img src={logo} alt="" />
+            </div>
+            <div className="noti-info side">
+              <span>{noti.name}</span>
+              <p className="reqfor side">{noti.reqFor}</p>
+              <div className="reqaddress side">
+                <p className="bedNo side">{noti.bed_no}</p>
+                <p className="wardNo side">{noti.ward_no}</p>
+              </div>
+            </div>
+            <div className="noti-check side">
+              <i className="bi-check-circle side"></i>
             </div>
           </div>
-          <div className="noti-check side">
-            <i className="bi-check-circle side"></i>
-          </div>
-        </div>
-        <div className="noti-message side">
-          <div className="noti-image side">
-            <img src={logo} alt="" />
-          </div>
-          <div className="noti-info side">
-            <span>Meet</span>
-            <p className="reqfor side"> Request for Bath</p>
-            <div className="reqaddress side">
-              <p className="bedNo side">Bed No.3</p>
-              <p className="wardNo side">Ward No.2</p>
-            </div>
-          </div>
-          <div className="noti-check side">
-            <i className="bi-check-circle side"></i>
-          </div>
-        </div>
-        <div className="noti-message side">
-          <div className="noti-image side">
-            <img src={logo} alt="" />
-          </div>
-          <div className="noti-info side">
-            <span>Meet</span>
-            <p className="reqfor side"> Request for Bath</p>
-            <div className="reqaddress side">
-              <p className="bedNo side">Bed No.3</p>
-              <p className="wardNo side">Ward No.2</p>
-            </div>
-          </div>
-          <div className="noti-check side">
-            <i className="bi-check-circle side"></i>
-          </div>
-        </div>
-        <div className="noti-message side">
-          <div className="noti-image side">
-            <img src={logo} alt="" />
-          </div>
-          <div className="noti-info side">
-            <span>Meet</span>
-            <p className="reqfor side"> Request for Bath</p>
-            <div className="reqaddress side">
-              <p className="bedNo side">Bed No.3</p>
-              <p className="wardNo side">Ward No.2</p>
-            </div>
-          </div>
-          <div className="noti-check side">
-            <i className="bi-check-circle side"></i>
-          </div>
-        </div>
-        <div className="noti-message side">
-          <div className="noti-image side">
-            <img src={logo} alt="" />
-          </div>
-          <div className="noti-info side">
-            <span>Meet</span>
-            <p className="reqfor side"> Request for Bath</p>
-            <div className="reqaddress side">
-              <p className="bedNo side">Bed No.3</p>
-              <p className="wardNo side">Ward No.2</p>
-            </div>
-          </div>
-          <div className="noti-check side">
-            <i className="bi-check-circle side"></i>
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );

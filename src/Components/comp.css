@@ -325,7 +325,7 @@ div.noti-message:nth-last-child(2) {
 }
 .settings:hover,
 .Log-Out:hover,
-.noti-info:hover {
+.noti-message:hover {
   background: #e5e5e5;
 }
 
@@ -350,6 +350,8 @@ div.noti-message:nth-last-child(2) {
   position: relative;
 }
 .item a {
+  background: none;
+  background: none;
   display: block;
   color: #828282;
   text-decoration: none;
@@ -363,7 +365,6 @@ div.noti-message:nth-last-child(2) {
   right: 15px;
   height: 35px;
   top: 8px;
-  background: white;
   width: 35px;
   border-radius: 15px;
   display: flex;
@@ -371,6 +372,7 @@ div.noti-message:nth-last-child(2) {
   align-items: center;
   box-shadow: 5px 5px 5px rgba(139, 139, 139, 0.1);
   transition: all 0.3s ease-in-out;
+  background: white;
 }
 .item a span {
   margin-left: 5px;

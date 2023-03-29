@@ -1,10 +1,9 @@
-import React, { useMemo } from "react";
-import { useEffect } from "react";
+import React, { useMemo, useState } from "react";
 import { useTable, usePagination } from "react-table";
 
 export const BASICtable = (props) => {
-  const columns = useMemo(() => props.columns, []);
-  const data = useMemo(() => props.data, []);
+  const [columns, setColumns] = useState(props.columns);
+  const [data, setData] = useState(props.data);
 
   const {
     getTableBodyProps,
@@ -25,16 +24,18 @@ export const BASICtable = (props) => {
     },
     usePagination
   );
-
   const { pageIndex } = state;
 
   return (
     <>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map((headerGroup) => {
+          {headerGroups.map((headerGroup, i) => {
             return (
-              <tr {...headerGroup.getHeaderGroupProps()}>
+              <tr
+                {...headerGroup.getHeaderGroupProps()}
+                key={headerGroup.Header}
+              >
                 {headerGroup.headers.map((column) => {
                   return (
                     <th {...column.getHeaderProps()}>
@@ -50,10 +51,12 @@ export const BASICtable = (props) => {
           {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr {...row.getRowProps()} key={props.data.id}>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <>
+                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    </>
                   );
                 })}
               </tr>

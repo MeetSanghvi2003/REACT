@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BASICtable } from "../table_components/BASIC-table";
 import { WardCol } from "../table_components/columns";
 import { Wdata } from "../table_components/Data";
+import { EditTable } from "../table_components/Edittable";
 
 export const ManageWard = () => {
   const [number, setNumber] = useState("");

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-export const NavVert = () => {
+export const NavVert = (props) => {
   const handleSubMenu = () => {
     let menu = document.querySelectorAll(".sub-menu a");
     let arrow = document.querySelector(".sub-btn .left");
@@ -18,11 +18,12 @@ export const NavVert = () => {
   };
   return (
     <>
-      <nav className="Navvert">
+      <nav className={`Navvert ${props.mystyle}`}>
         <div className="list">
-          <div className="item">
+          <div className={`item ${props.mystyle}`}>
             <NavLink to="/">
-              <i className="icon bi bi-house"></i> <span> Dashboard </span>
+              <i className={`icon bi bi-house ${props.mystyle}`}></i>{" "}
+              <span> Dashboard </span>
               <i className="left bi-chevron-right"></i>
             </NavLink>
           </div>

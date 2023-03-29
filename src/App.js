@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import "./Components/form.css";
@@ -19,26 +20,49 @@ import { Forgot_pass } from "./Components/Forgot_pass";
 import { Chart } from "./Components/chart";
 
 function App() {
+  const [mystyle, setmystyle] = useState("light");
+  const toggleStyle = () => {
+    if (mystyle !== "dark") {
+      setmystyle("dark");
+    } else {
+      setmystyle("light");
+    }
+  };
   return (
     <>
-      <NavHor />
-      <NavVert />
-      <div className="container">
+      <NavHor toggleStyle={toggleStyle} mystyle={mystyle} />
+      <NavVert mystyle={mystyle} />
+      <div className={`container ${mystyle}`}>
         <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/audit-log" element={<AuditLog />}></Route>
-          <Route path="/activity-report" element={<ActivityRep />}></Route>
-          <Route path="/settings" element={<Settings />}></Route>
+          <Route path="/" element={<Dashboard mystyle={mystyle} />}></Route>
+          <Route
+            path="/audit-log"
+            element={<AuditLog mystyle={mystyle} />}
+          ></Route>
+          <Route
+            path="/activity-report"
+            element={<ActivityRep mystyle={mystyle} />}
+          ></Route>
+          <Route
+            path="/settings"
+            element={<Settings mystyle={mystyle} />}
+          ></Route>
           <Route
             path="/hospital-manage-action"
-            element={<ManageAction />}
+            element={<ManageAction mystyle={mystyle} />}
           ></Route>
-          <Route path="/hospital-manage-bed" element={<ManageBed />}></Route>
+          <Route
+            path="/hospital-manage-bed"
+            element={<ManageBed mystyle={mystyle} />}
+          ></Route>
           <Route
             path="/hospital-manage-floor"
-            element={<ManageFloor />}
+            element={<ManageFloor mystyle={mystyle} />}
           ></Route>
-          <Route path="/hospital-manage-ward" element={<ManageWard />}></Route>
+          <Route
+            path="/hospital-manage-ward"
+            element={<ManageWard mystyle={mystyle} />}
+          ></Route>
           <Route path="/Signin" element={<Signin />}></Route>
           <Route
             path="/Signin/forgot-password"

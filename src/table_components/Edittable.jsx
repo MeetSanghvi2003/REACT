@@ -1,8 +1,9 @@
 import React, { useMemo } from "react";
 import { useEffect } from "react";
 import { useTable, usePagination } from "react-table";
+import { Cell } from "recharts";
 
-export const SettingsTable = (props) => {
+export const EditTable = (props) => {
   const columns = useMemo(() => props.columns, []);
   const data = useMemo(() => props.data, []);
 
@@ -39,7 +40,6 @@ export const SettingsTable = (props) => {
                   return (
                     <th {...column.getHeaderProps()}>
                       {column.render("Header")}
-                      {""}
                     </th>
                   );
                 })}
@@ -62,7 +62,10 @@ export const SettingsTable = (props) => {
                   <button className="edit" onClick={() => props.setShow(true)}>
                     <i className="bi bi-pencil"></i> Edit
                   </button>
-                  <button className="delete">
+                  <button
+                    className="delete"
+                    onClick={() => props.setShowDelete(true)}
+                  >
                     <i className="bi bi-trash"></i> Delete
                   </button>
                 </td>

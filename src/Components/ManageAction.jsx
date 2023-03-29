@@ -1,9 +1,9 @@
 import React from "react";
 
-export const ManageAction = () => {
+export const ManageAction = (props) => {
   return (
     <>
-      <div className="create">
+      <div className="create" style={props.mystyle}>
         <div className="create-in">
           <div className="create-header">
             <h3>Create Floors</h3>

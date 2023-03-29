@@ -2,7 +2,7 @@ import React from "react";
 import ReactSwitch from "react-switch";
 import logo from "./imgs/images.jpg";
 
-export const NavHor = () => {
+export const NavHor = (props) => {
   return (
     <>
       <nav className="Navhor">
@@ -20,7 +20,7 @@ export const NavHor = () => {
           <div className="element">
             <div className="switch">
               <label>
-                <input type="checkbox" />
+                <input type="checkbox" onClick={props.toggleStyle} />
                 <span class="slider round"></span>
               </label>
             </div>

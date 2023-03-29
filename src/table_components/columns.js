@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { format } from "date-fns";
+import { Bdata } from "./Data";
+import { id } from "date-fns/locale";
 
 export const Columns = [
   {
@@ -92,9 +94,9 @@ export const WardCol = [
   },
   {
     Header: "Actions",
-    Cell: ({ cell }) => (
+    Cell: ({ row }) => (
       <>
-        <button className="edit">
+        <button className="edit" onClick={() => row}>
           <i className="bi bi-pencil"></i> Edit
         </button>
         <button className="delete">
@@ -104,6 +106,14 @@ export const WardCol = [
     ),
   },
 ];
+const onDelete = (row, cell) => {
+  Bdata.map((value, index) => {
+    if (row.id == value.id) {
+      Bdata.splice(value.id, 1);
+    }
+    console.log(value);
+  });
+};
 export const BedCol = [
   {
     Header: "Bed No",
@@ -119,13 +129,14 @@ export const BedCol = [
   },
   {
     Header: "Actions",
-    Cell: ({ cell }) => (
+    Cell: ({ row, cell }) => (
       <>
         <button className="edit">
-          <i className="bi bi-pencil"></i> Edit{" "}
+          <i className="bi bi-pencil"></i> Edit
         </button>
-        <button className="delete">
-          <i className="bi bi-trash"></i> Delete
+        <button className="delete" onClick={() => onDelete(row, cell)}>
+          <i className="bi bi-trash"></i>
+          Delete
         </button>
       </>
     ),
