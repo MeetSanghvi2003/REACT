@@ -7,7 +7,6 @@ import { DeletePopup, Popup } from "./popup";
 export const Settings = () => {
   const [show, setShow] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
-  const [text, setText] = useState(SettingData);
 
   return (
     <>
@@ -24,13 +23,7 @@ export const Settings = () => {
           </div>
         </div>
         <div className="setting-table">
-          <EditTable
-            columns={SettingCol}
-            data={SettingData}
-            setShow={setShow}
-            setShowDelete={setShowDelete}
-            setText={setText}
-          />
+          <EditTable cols={SettingCol} datas={SettingData} />
         </div>
       </div>
       {show ? <Popup setShow={setShow} /> : ""}

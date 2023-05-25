@@ -1,60 +1,80 @@
-import React from "react";
-import { useState } from "react";
-import { BASICtable } from "../table_components/BASIC-table";
-import { BedCol } from "../table_components/columns";
-import { Bdata } from "../table_components/Data";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { EditTable } from "../table_components/Edittable";
+import { useEffect } from "react";
+import { fetchBeds } from "../state/Slices/bedSlice";
+import { toast } from "react-toastify";
 
-export const ManageBed = () => {
-  const [number, setNumber] = useState("");
-  const [fnumber, setFnumber] = useState("Select Floor");
-  const [Wname, setWname] = useState("Select Ward");
-  const [warn, setWarn] = useState("");
+export const ManageBed = (props) => {
+  const { bedColumn, bedData, isError, isLoading } = useSelector(
+    (state) => state.bed
+  );
+  const { wardData } = useSelector((state) => state.ward);
+  const [floor, setFloor] = useState("");
+  const [bed_desc, setBed] = useState("");
+  const [remote, setRemote] = useState("");
+  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
 
-  const [beds, setBeds] = useState([
-    {
-      key: 0,
-      bed_no: 0,
-      ward_name: "EMERGENCY",
-      floor_no: "0",
-    },
-  ]);
+  useEffect(() => {
+    dispatch(fetchBeds());
+  }, []);
 
-  const onDelete = (bed) => {
-    setBeds(
-      beds.filter((e) => {
-        return e !== bed;
-      })
-    );
+  const Post = (data) => {
+    fetch("https://nurster.com/api/hospital/addBed/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(data),
+    });
+    dispatch(fetchBeds());
   };
 
-  const addBed = () => {
-    let key = beds[beds.length - 1].key + 1;
-    let bed = {
-      key: key,
-      bed_no: number,
-      ward_name: Wname,
-      floor_no: fnumber,
-    };
-    setBeds([...beds, bed]);
+  const Delete = (id) => {
+    fetch(`https://nurster.com/api/hospital/accessSingleHospitalBeds/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    toast("Bed Deleted!", {
+      type: "success",
+      style: { fontSize: "13px" },
+    });
+    setTimeout(() => {
+      dispatch(fetchBeds());
+    }, 100);
   };
 
-  const createData = () => {
-    if (number > 30 || number <= 0) {
-      setWarn("There are only 30 Beds on each floor");
-      return false;
-    } else if (fnumber == "Select Floor") {
-      setWarn("Give the Floor Number");
-      return false;
-    } else if (Wname == "Select Ward") {
-      setWarn("Give the Name of the Ward");
-      return false;
+  const submitBed = (e) => {
+    e.preventDefault();
+    if (floor && bed_desc && remote) {
+      let add = {
+        bed_no: "1",
+        floor,
+        bed_desc,
+        hospital_id: 1,
+        remote,
+        ward_id: null,
+      };
+      setData([...data, add]);
+      Post(add);
+      setBed("");
+      setFloor("Select Floor");
+      setRemote("");
+
+      toast("Bed Added!", {
+        type: "success",
+        style: { fontSize: "13px" },
+      });
     } else {
-      setNumber("");
-      setFnumber("Select Floor");
-      setWname("Select Ward");
-      setWarn("");
-      addBed();
-      return true;
+      toast("All fields are Required!", {
+        type: "error",
+        style: { fontSize: "13px" },
+      });
     }
   };
 
@@ -65,49 +85,49 @@ export const ManageBed = () => {
           <div className="create-header">
             <h3>Create Floors</h3>
           </div>
-          <div className="for">
-            <input
-              type="text"
-              placeholder="Enter Bed No."
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
-          </div>
-
-          <div className="for">
-            <select
-              id="list"
-              value={fnumber}
-              onChange={(e) => setFnumber(e.target.value)}
-            >
-              <option value="Select Floor">Select Floor</option>
-              <option value="G">G</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          <div className="for">
-            <select
-              id="list"
-              value={Wname}
-              onChange={(e) => setWname(e.target.value)}
-            >
-              <option value="Select Ward">Select Ward</option>
-              <option value="General">Genaral</option>
-              <option value="ICU">ICU</option>
-              <option value="Emergency">Emergency</option>
-            </select>
-          </div>
-          <div className="for">
-            <input type="text" placeholder="Enter Bed Url" />
-          </div>
-          <div className="warn">{warn}</div>
-          <div className="create-elmnt">
-            <button onClick={createData}>Create</button>
-          </div>
+          <form onSubmit={submitBed}>
+            <div className="for">
+              <select id="list" onChange={(e) => setFloor(e.target.value)}>
+                <option value="Select Floor">Select Floor</option>
+                <option value="G">G</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div className="for">
+              <select id="list">
+                <option value="Select Ward">Select Ward</option>
+                {wardData.filter((ward) => {
+                  if (floor === ward.floor)
+                    return (
+                      <option value={ward.ward_name}>{ward.ward_name}</option>
+                    );
+                })}
+              </select>
+            </div>
+            <div className="for">
+              <input
+                type="text"
+                placeholder="Bed Description..."
+                value={bed_desc}
+                onChange={(e) => setBed(e.target.value)}
+              />
+            </div>
+            <div className="for">
+              <input
+                type="text"
+                placeholder="Remote Serial"
+                value={remote}
+                onChange={(e) => setRemote(e.target.value)}
+              />
+            </div>
+            <div className="create-elmnt">
+              <button>Create</button>
+            </div>
+          </form>
         </div>
       </div>
 
@@ -119,7 +139,19 @@ export const ManageBed = () => {
               <input type="text" placeholder="Search" />
             </div>
           </div>
-          <BASICtable columns={BedCol} data={Bdata} value={"5"} />
+          {isError ? (
+            <div className="loaderContainer">
+              <h3>Maybe You're Not Connected to the internet</h3>
+            </div>
+          ) : isLoading ? (
+            <div className="loaderContainer">
+              <section className="section-loading">
+                <div className="load"></div>
+              </section>
+            </div>
+          ) : (
+            <EditTable cols={bedColumn} datas={bedData} Delete={Delete} />
+          )}
         </div>
       </div>
     </>

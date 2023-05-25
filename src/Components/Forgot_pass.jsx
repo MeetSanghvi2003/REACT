@@ -3,7 +3,6 @@ import logo from "./imgs/images.jpg";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as y from "yup";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 export const Forgot_pass = () => {
   const [warn, setWarn] = useState("");
@@ -17,25 +16,13 @@ export const Forgot_pass = () => {
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const navigate = useNavigate();
-
-  const onSubmit = (data) => {
-    const Lemail = localStorage.getItem("Email");
-    if (!errors.Email && Lemail !== data.Email) {
-      setWarn("Your Email is not Registered");
-    } else {
-      setWarn("");
-      reset();
-      navigate("/Signin/reset-password");
-    }
-  };
+  const onSubmit = (data) => {};
 
   return (
     <>

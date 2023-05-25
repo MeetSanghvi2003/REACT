@@ -54,92 +54,53 @@ export const Columns = [
 
 export const FloorCol = [
   {
-    Header: "No.#",
-    accessor: "num",
+    Header: "#",
+    accessor: "id",
   },
   {
-    Header: "Floor No",
-    accessor: "f_no",
-  },
-  {
-    Header: "Floor Name",
-    accessor: "f_name",
-  },
-  {
-    Header: "Actions",
-    Cell: ({ cell }) => (
-      <>
-        <button className="edit">
-          <i className="bi bi-pencil"></i> Edit
-        </button>
-        <button className="delete">
-          <i className="bi bi-trash"></i> Delete
-        </button>
-      </>
-    ),
+    Header: "Total Floors",
+    accessor: "total_floors",
   },
 ];
 export const WardCol = [
   {
-    Header: "Ward No",
-    accessor: "w_no",
+    Header: "#",
+    accessor: "id",
   },
   {
     Header: "Ward Name",
-    accessor: "w_name",
+    accessor: "ward_name",
   },
   {
-    Header: "Floor Name",
-    accessor: "f_name",
+    Header: "Floor",
+    accessor: "floor",
   },
   {
-    Header: "Actions",
-    Cell: ({ row }) => (
-      <>
-        <button className="edit" onClick={() => row}>
-          <i className="bi bi-pencil"></i> Edit
-        </button>
-        <button className="delete">
-          <i className="bi bi-trash"></i> Delete
-        </button>
-      </>
-    ),
+    Header: "LED",
+    accessor: "led",
   },
 ];
-const onDelete = (row, cell) => {
-  Bdata.map((value, index) => {
-    if (row.id == value.id) {
-      Bdata.splice(value.id, 1);
-    }
-    console.log(value);
-  });
-};
+
 export const BedCol = [
   {
-    Header: "Bed No",
-    accessor: "b_no",
+    Header: "#",
+    accessor: "id",
   },
   {
-    Header: "Ward Name",
-    accessor: "w_name",
+    Header: "Bed Description",
+    accessor: "bed_desc",
   },
   {
-    Header: "Floor Name",
-    accessor: "f_name",
+    Header: "Floor",
+    accessor: "floor",
   },
   {
-    Header: "Actions",
-    Cell: ({ row, cell }) => (
-      <>
-        <button className="edit">
-          <i className="bi bi-pencil"></i> Edit
-        </button>
-        <button className="delete" onClick={() => onDelete(row, cell)}>
-          <i className="bi bi-trash"></i>
-          Delete
-        </button>
-      </>
-    ),
+    Header: "Ward",
+    accessor: "",
+  },
+  {
+    Header: "Remote",
+    accessor: "remote",
   },
 ];
 export const AuditCol = [

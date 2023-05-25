@@ -1,84 +1,39 @@
-import React, { useState } from "react";
-import * as y from "yup";
-import { useMemo } from "react";
-import { FloorCol } from "../table_components/columns";
-import { BASICtable } from "../table_components/BASIC-table";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchFloors } from "../state/Slices/floorSlice";
+import { EditTable } from "../table_components/Edittable";
 import { useEffect } from "react";
-import { Fdata } from "../table_components/Data";
+import { toast } from "react-toastify";
+import { BASICtable } from "../table_components/BASIC-table";
 
 export const ManageFloor = (props) => {
-  const [number, setNumber] = useState("");
-  const [name, setName] = useState("");
-  const [warn, setWarn] = useState("");
+  const { floorData, floorColumn } = useSelector((state) => state.floor);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchFloors());
+  }, []);
 
-  const [floors, setFloors] = useState([
-    {
-      num: 0,
-      f_no: 0,
-      f_name: "Floor Name",
-    },
-  ]);
-
-  const onDelete = (floor) => {
-    setFloors(
-      floors.filter((e) => {
-        return e !== floor;
-      })
-    );
-  };
-
-  const addFloor = () => {
-    let num = floors[floors.length - 1].num + 1;
-    let floor = {
-      num: num,
-      f_no: number,
-      f_name: name,
-    };
-    setFloors([...floors, floor]);
-  };
-
-  const createData = (e) => {
-    e.preventDefault();
-    if (number > 5 || number < 0) {
-      setWarn("Hospital only have 6 floors : Ground , 1 , 2 , 3 , 4 , 5");
-      return false;
-    } else if (!name || name.length === 0) {
-      setWarn("Please Enter the Floor Name");
-      return false;
-    } else {
-      setWarn("");
-      setNumber("");
-      setName("");
-      addFloor();
-    }
+  const cantAdd = () => {
+    toast("Floors are Already Added!", {
+      type: "warning",
+      style: { fontSize: "13px" },
+    });
   };
 
   return (
     <>
       <div className="create">
-        <div className="create-in" style={props.myStyle}>
+        <div className="create-in">
           <div className="create-header">
             <h3>Create Floors</h3>
           </div>
-          <div className="for">
-            <input
-              type="number"
-              placeholder="Floor No."
-              value={number}
-              onChange={(e) => setNumber(e.target.value)}
-            />
+          <div className="for" onClick={cantAdd}>
+            <input type="number" placeholder="Floors" disabled />
           </div>
-          <div className="for">
-            <input
-              type="text"
-              placeholder="Floor Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="warn">{warn}</div>
+
+          <span className="warn">All Floors Have Been added</span>
           <div className="create-elmnt">
-            <button onClick={createData}>Create</button>
+            <button onClick={cantAdd}>Create</button>
           </div>
         </div>
       </div>
@@ -90,12 +45,7 @@ export const ManageFloor = (props) => {
               <input type="text" placeholder="Search" />
             </div>
           </div>
-          <BASICtable
-            columns={FloorCol}
-            data={Fdata}
-            onDelete={onDelete}
-            style={props.myStyle}
-          />
+          <BASICtable columns={floorColumn} data={floorData} />
         </div>
       </div>
     </>

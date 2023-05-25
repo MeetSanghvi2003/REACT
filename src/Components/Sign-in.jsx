@@ -1,21 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "./imgs/images.jpg";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as y from "yup";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-export const Signin = () => {
-  let regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,32}$/gm;
+export const Signin = (props) => {
   const schema = y.object().shape({
-    Email: y.string().email("Email is Invalid").required("Email is Required"),
-    Username: y.string().required("Username is Required"),
-    Password: y
-      .string()
-      .required("Password is Required")
-      .min(8, "Password must be of 8 Character or more")
-      .matches(regex, "Create a Strong Password")
-      .max(20),
+    email: y.string().email("email is Invalid").required("email is Required"),
+    password: y.string().required("password is Required").max(20),
   });
 
   const {
@@ -27,14 +22,47 @@ export const Signin = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    localStorage.setItem("Email", data.Email);
-    localStorage.setItem("Username", data.Username);
-    localStorage.setItem("Password", data.Password);
-    reset();
+  const onSubmit = (data) => {
+    if (data) {
+      fetch("https://nurster.com/api/user/login/", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then((result) => {
+        if (result.ok !== true) {
+          toast("Something was wrong!", {
+            type: "error",
+            style: { fontSize: "13px" },
+          });
+        }
+        result.json().then((resp) => {
+          localStorage.setItem("token", resp.token.access);
+          console.log(resp.token.access);
+          if (resp.token) {
+            localStorage.setItem("login", true);
+            toast("Logged In!", {
+              type: "success",
+              style: { fontSize: "13px" },
+            });
+            reset();
+            navigate("/");
+          } else {
+          }
+        });
+      });
+    }
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    let login = localStorage.getItem("login");
+    if (login) {
+      navigate("/");
+    }
+  });
   return (
     <>
       <div className="center">
@@ -54,35 +82,35 @@ export const Signin = () => {
               <input
                 type="text"
                 id="sUser"
-                placeholder="Enter Email"
-                {...register("Email")}
+                placeholder="Enter email"
+                {...register("email")}
               />
             </div>
-            <span className="warn"> {errors.Email?.message}</span>
-            <div className="for">
+            <span className="warn"> {errors.email?.message}</span>
+            {/* <div className="for">
               <input
                 type="text"
                 id="sUser"
                 placeholder="Enter Username"
                 {...register("Username")}
               />
-            </div>
+            </div> */}
             <span className="warn">{errors.Username?.message}</span>
             <div className="for">
               <input
                 type="password"
                 id="sPass"
-                placeholder="Enter Password"
-                {...register("Password")}
+                placeholder="Enter password"
+                {...register("password")}
               />
             </div>
-            <span className="warn">{errors.Password?.message}</span>
+            <span className="warn">{errors.password?.message}</span>
             <div className="for">
               <button type="submit">Sign In</button>
             </div>
           </form>
           <div className="fPass">
-            <Link to="/Signin/forgot-password">Forgot Password?</Link>
+            <Link to="/Signin/forgot-password">Forgot password?</Link>
           </div>
         </div>
       </div>

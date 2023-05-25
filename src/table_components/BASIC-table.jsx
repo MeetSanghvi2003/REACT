@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useTable, usePagination } from "react-table";
 
-export const BASICtable = (props) => {
-  const [columns, setColumns] = useState(props.columns);
-  const [data, setData] = useState(props.data);
+export const BASICtable = ({ columns, data }) => {
+  // const [columns, setColumns] = useState(props.columns);
+  // const [data, setData] = useState(props.data);
 
   const {
     getTableBodyProps,
@@ -48,14 +48,16 @@ export const BASICtable = (props) => {
           })}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+          {page.map((row, index) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} key={props.data.id}>
-                {row.cells.map((cell) => {
+              <tr {...row.getRowProps()} key={index}>
+                {row.cells.map((cell, key) => {
                   return (
                     <>
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                      <td {...cell.getCellProps()} key={key}>
+                        {cell.render("Cell")}
+                      </td>
                     </>
                   );
                 })}

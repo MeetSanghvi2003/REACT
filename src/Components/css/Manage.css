@@ -43,6 +43,7 @@
 }
 .available-in {
   border-radius: 8px;
+  min-height: 200px;
   padding: 10px;
   border: 1px solid #e5e5e5;
   background: #ffffff;
@@ -62,7 +63,6 @@
   max-width: 300px;
   width: 100%;
   padding: 0 20px;
-  display: flex;
 }
 .available-search input {
   height: 30px;
@@ -83,6 +83,10 @@
   justify-content: center;
   align-items: center;
 }
+.audit-table .available-search {
+  display: flex;
+  max-width: 300px;
+}
 .Aud-date span {
   color: #333333;
   font-size: 11px;
@@ -98,21 +102,7 @@
   color: white;
   font-size: 12px;
 }
-.avail-table {
-  width: 100%;
-  margin-top: 20px;
-}
-.table-head {
-  background: #f6f7fc;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  text-align: center;
-  height: 40px;
-  line-height: 40px;
-  color: #623ce7;
-  font-weight: 600;
-  border-radius: 25px 25px 0 0;
-}
+
 .table-row {
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
@@ -140,12 +130,7 @@
   margin-left: 10px;
   background: #ff4267;
 }
-.field.four button i {
-  font-size: 10px;
-}
-.table-row:nth-child(odd) {
-  background: #f6f7fc;
-}
+
 .table-end {
   background: #f6f7fc;
   display: flex;
@@ -168,8 +153,7 @@
   font-size: 15px;
 }
 
-.table-end button,
-.elmnts button {
+.page-change button {
   height: 25px;
   width: 25px;
   border: none;
@@ -204,14 +188,12 @@
   border-radius: 8px;
   padding: 20px;
 }
-.audit-table .table-head {
-  grid-template-columns: 20% 20% 20% 20% 20%;
-}
+
 table {
   margin-top: 30px;
   font-size: 12px;
-  width: 100%;
   max-width: 100%;
+  width: 100%;
   border-collapse: collapse;
   background-color: #f6f7fc;
   border-radius: 30px 30px 0 0;
@@ -248,6 +230,130 @@ table td {
 }
 .setting-table table tr th:nth-child(2),
 .setting-table table tr td:nth-child(2) {
-  padding-right: 450px;
-  padding-left: 0;
+  padding: 0;
+}
+
+.section-loading {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-loading .load {
+  height: 20px;
+  width: 20px;
+  position: relative;
+}
+.section-loading .load:before,
+.section-loading .load:after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border: 3px solid #623ce7;
+  animation: animate 3s linear infinite;
+}
+.section-loading .load:after {
+  animation-direction: reverse;
+}
+
+.loaderContainer {
+  height: 130px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes animate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .create {
+    max-width: 97.5%;
+    margin: auto;
+  }
+  .create-in .create-header h3 {
+    font-size: 15px;
+  }
+  .available {
+    max-width: 97.5%;
+    margin: auto;
+  }
+  .available-in .create-header h3 {
+    font-size: 15px;
+    width: 200px;
+  }
+  .available-search {
+    max-width: 100px;
+    padding: 0;
+  }
+  .available-search input {
+    max-width: 100px;
+    font-size: 10px;
+  }
+  table {
+    margin-top: 25px;
+    border-radius: 15px 15px 0 0;
+  }
+  table thead th {
+    font-size: 12px;
+  }
+  table td,
+  table th {
+    padding: 5px;
+  }
+  table td {
+    font-size: 10px;
+    font-weight: 400;
+  }
+  .delete {
+    border-radius: 3px;
+    height: 25px;
+    width: 40px;
+    margin: 0;
+    font-size: 8px;
+  }
+  .table-end {
+    height: 25px;
+    border-radius: 0 0 15px 15px;
+  }
+  .elmnts {
+    max-width: 100px;
+  }
+  .elmnts span {
+    font-size: 12px;
+  }
+  .page-change button {
+    height: 15px;
+    width: 15px;
+    font-size: 9px;
+  }
+  .page-change {
+    max-width: 40%;
+  }
+  .audit-table {
+    padding: 10px;
+  }
+  .audit-table .create-header h3 {
+    font-size: 14px;
+  }
+  .audit-table .available-search {
+    max-width: 200px;
+    justify-content: space-between;
+  }
+  .audit-table .available-search button {
+    width: 60px;
+    border-radius: 3px;
+  }
+  .Aud-date {
+    max-width: 125px;
+    height: 30px;
+  }
+  .Aud-date span {
+    font-size: 8px;
+  }
 }

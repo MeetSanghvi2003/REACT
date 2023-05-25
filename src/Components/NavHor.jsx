@@ -1,8 +1,36 @@
 import React from "react";
-import ReactSwitch from "react-switch";
 import logo from "./imgs/images.jpg";
+import { useNavigate } from "react-router-dom";
 
 export const NavHor = (props) => {
+  const togglemenu = () => {
+    const menuIcon = document.querySelector(".menu>i"),
+      menu = document.querySelector(".Navvert"),
+      words = document.querySelectorAll(".item a>i,.item a>span");
+    if (menu.style.width !== "100%") {
+      menu.style.width = "100%";
+      menuIcon.style.cssText =
+        "transform:rotate(90deg); transition:all 0.3s ease-in-out";
+      for (let a = 0; a < words.length; a++) {
+        words[a].style.cssText = "font-size:small";
+      }
+    } else {
+      menu.style.width = "0";
+      menuIcon.style.transform = "rotate(0)";
+      for (let a = 0; a < words.length; a++) {
+        words[a].style.cssText =
+          "font-size:0px;transition:all 0.3s ease-in-out";
+      }
+    }
+  };
+  const navigate = useNavigate();
+  const removeUser = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    localStorage.removeItem("login");
+    navigate("/Signin");
+  };
+
   return (
     <>
       <nav className="Navhor">
@@ -10,6 +38,9 @@ export const NavHor = (props) => {
           <div className="nav-comp">
             <img src={logo} alt="" />
             <h3>SMART</h3>
+          </div>
+          <div className="menu">
+            <i className="bi bi-list" onClick={togglemenu}></i>
           </div>
           <div className="search">
             <input type="search" placeholder="Search.." />
@@ -20,8 +51,8 @@ export const NavHor = (props) => {
           <div className="element">
             <div className="switch">
               <label>
-                <input type="checkbox" onClick={props.toggleStyle} />
-                <span class="slider round"></span>
+                <input type="checkbox" />
+                <span className="slider round"></span>
               </label>
             </div>
             <div className="notify">
@@ -59,11 +90,7 @@ export const NavHor = (props) => {
               <span className="hov">{localStorage.getItem("Username")}</span>
               <i className="hov bi-chevron-down"></i>
               <div className="accHover">
-                <div className="settings">
-                  <i className="bi-gear"></i>
-                  <span>Settings</span>
-                </div>
-                <div className="Log-Out">
+                <div className="Log-Out" onClick={removeUser}>
                   <i className="bi-box-arrow-left"></i>
                   <span>Log Out</span>
                 </div>

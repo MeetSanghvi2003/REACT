@@ -1,19 +1,19 @@
 import React from "react";
 
-export const ManageAction = (props) => {
+export const ManageAction = () => {
   return (
     <>
-      <div className="create" style={props.mystyle}>
+      <div className="create">
         <div className="create-in">
           <div className="create-header">
             <h3>Create Floors</h3>
           </div>
           <form>
             <div className="for">
-              <input type="text" placeholder="Floor No." />
+              <input type="text" placeholder="Floor No." disabled />
             </div>
             <div className="for">
-              <input type="text" placeholder="Floor Name" />
+              <input type="text" placeholder="Floor Name" disabled />
             </div>
             <div className="create-elmnt">
               <button>Create</button>

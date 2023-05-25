@@ -1,12 +1,10 @@
-import React, { useMemo } from "react";
-import { useEffect } from "react";
+import React from "react";
 import { useTable, usePagination } from "react-table";
-import { Cell } from "recharts";
 
-export const EditTable = (props) => {
-  const columns = useMemo(() => props.columns, []);
-  const data = useMemo(() => props.data, []);
+export const EditTable = ({ cols, datas, Delete }) => {
+  const columns = cols;
 
+  const data = datas;
   const {
     getTableBodyProps,
     nextPage,
@@ -28,6 +26,11 @@ export const EditTable = (props) => {
   );
 
   const { pageIndex } = state;
+  const onDelete = (id) => {
+    setTimeout(() => {
+      Delete(id);
+    }, 1000);
+  };
 
   return (
     <>
@@ -43,28 +46,29 @@ export const EditTable = (props) => {
                     </th>
                   );
                 })}
-                <th>Activity</th>
+                <th>Actions</th>
               </tr>
             );
           })}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+          {page.map((row, index) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
+              <tr {...row.getRowProps()} key={index}>
+                {row.cells.map((cell, ind) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <td {...cell.getCellProps()} key={ind}>
+                      {cell.render("Cell")}
+                    </td>
                   );
                 })}
                 <td>
-                  <button className="edit" onClick={() => props.setShow(true)}>
-                    <i className="bi bi-pencil"></i> Edit
-                  </button>
                   <button
                     className="delete"
-                    onClick={() => props.setShowDelete(true)}
+                    onClick={() => {
+                      onDelete(row.values.id);
+                    }}
                   >
                     <i className="bi bi-trash"></i> Delete
                   </button>

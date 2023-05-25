@@ -30,7 +30,7 @@ export const NavVert = (props) => {
           <div className="item">
             <Link className="sub-btn" onClick={handleSubMenu}>
               <i className="icon bi bi-building"></i> <span> Hospital </span>
-              <i className="left bi-chevron-right"></i>
+              <i className="left bi-chevron-right leftEdit"></i>
             </Link>
             <div className="sub-menu">
               <NavLink to="/hospital-manage-floor" className="sub-item">

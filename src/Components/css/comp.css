@@ -182,7 +182,6 @@ input:checked + .slider:before {
 }
 .account span.hov {
   max-width: 100px;
-  width: auto;
 }
 .account i.hov {
   cursor: pointer;
@@ -373,6 +372,7 @@ div.noti-message:nth-last-child(2) {
   box-shadow: 5px 5px 5px rgba(139, 139, 139, 0.1);
   transition: all 0.3s ease-in-out;
   background: white;
+  -webkit-transition: all 0.3s ease-in-out;
 }
 .item a span {
   margin-left: 5px;
@@ -394,7 +394,6 @@ div.noti-message:nth-last-child(2) {
 .sub-menu {
   padding-left: 20px;
   transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
 }
 .sub-menu a {
   line-height: 30px;
@@ -419,4 +418,113 @@ div.noti-message:nth-last-child(2) {
   top: 2.5px;
   background-color: #623ce7;
   left: 0;
+}
+.menu i {
+  font-size: 30px;
+  color: #623ce7;
+  cursor: pointer;
+}
+.menu {
+  display: none;
+}
+@media only screen and (max-width: 768px) {
+  nav.Navvert {
+    max-width: 100%;
+    width: 0;
+    border-bottom: 2px solid #e5e5e5;
+    transition: all 0.3s ease-in-out;
+    max-height: 305px;
+    height: auto;
+    overflow: scroll;
+    background: white;
+  }
+
+  .nav-comp {
+    display: none;
+  }
+  nav.Navhor {
+    height: 110px;
+  }
+  .menu {
+    display: block;
+    height: 60px;
+    max-width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .item a .left {
+    display: none;
+  }
+  .item a .left.leftEdit {
+    display: flex;
+    height: 20px;
+    width: 20px;
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  }
+  .active::before {
+    display: none;
+  }
+  .list {
+    padding: 0;
+  }
+  .item:not(:nth-child(5)) {
+    border-bottom: 0.5px solid #e5e5e5;
+  }
+  .hor-in {
+    position: relative;
+  }
+  .search {
+    position: absolute;
+    bottom: 0;
+    height: 50px;
+    max-width: 100%;
+  }
+  .search input {
+    max-width: 330px;
+  }
+  .notify {
+    display: none;
+  }
+  .account {
+    height: 60px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    max-width: 125px;
+  }
+  .account img {
+    height: 30px;
+    width: 30px;
+  }
+  .account span.hov {
+    max-width: 80px;
+  }
+  .accHover {
+    top: 60px;
+    right: 5px;
+  }
+  .settings i,
+  .settings,
+  .Log-Out i,
+  .Log-Out {
+    font-size: 14px;
+    border: none;
+  }
+  .switch {
+    position: absolute;
+    top: 30px;
+    right: 150px;
+  }
+  .item a:not(.sub-item) {
+    line-height: 40px;
+  }
+  .sub-menu a {
+    line-height: 25px;
+  }
 }
